@@ -1,506 +1,1428 @@
-# EstateHub - Full-Stack Real Estate Management Platform
+🏠 EstateHub — Real Estate Management Platform
 
-A production-style, full-stack Real Estate Management and Property Marketplace web application built with the MERN stack (MongoDB, Express.js, React.js, Node.js).
+EstateHub is a full-stack MERN (MongoDB, Express.js, React, Node.js) real-estate management and property marketplace application.
 
-## 🏠 Features
+It provides a complete workflow for property discovery, property/unit management, enquiries, site visits, bookings, wishlists, comparison, notifications, administration, agent operations, authentication, image storage, email/password recovery, analytics, and automated testing.
 
-### For Customers
-- **Property Browsing**: Browse and search through an extensive property database
-- **Advanced Filtering**: Filter by location, type, BHK, price range, area, amenities, and more
-- **Property Details**: View detailed property information with image galleries and floor plans
-- **Wishlist**: Save favorite properties for later reference
-- **Property Comparison**: Compare up to 3 properties side-by-side
-- **Enquiries**: Send enquiries to agents about properties of interest
-- **Visit Scheduling**: Schedule property visits at convenient times
-- **Booking Requests**: Request property bookings with a mock payment system
-- **User Dashboard**: Track enquiries, visits, bookings, and manage profile
+✨ Features
 
-### For Administrators
-- **Dashboard Analytics**: View comprehensive statistics and charts
-- **Property Management**: Full CRUD operations for properties
-- **Unit Management**: Manage individual apartment units in projects
-- **User Management**: Manage users and their roles
-- **Agent Management**: Add, edit, and assign agents to properties
-- **Enquiry Management**: Track and manage customer enquiries
-- **Visit Management**: Schedule and manage property visits
-- **Booking Management**: Approve, reject, and manage booking requests
-- **Amenity Management**: Create and manage property amenities
+👤 Authentication & User Accounts
 
-## 🛠 Technology Stack
+User registration
 
-### Frontend
-- **React.js** - UI library
-- **Vite** - Build tool and dev server
-- **React Router DOM** - Client-side routing
-- **Axios** - HTTP client for API requests
-- **Tailwind CSS** - Utility-first CSS framework
-- **Context API** - State management
-- **React Hook Form** - Form handling
-- **Recharts** - Data visualization charts
-- **Lucide React** - Icon library
-- **React Hot Toast** - Toast notifications
+User login/logout
 
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-- **JWT** - Authentication tokens
-- **bcryptjs** - Password hashing
-- **dotenv** - Environment variable management
-- **CORS** - Cross-origin resource sharing
-- **Express Validator** - Request validation
+JWT-based authentication
 
-## 📁 Project Structure
+Role-based access control
 
-```
-estatehub/
+Password hashing with bcrypt
+
+Current-user/session endpoint
+
+Forgot-password flow
+
+Password reset flow
+
+Protected user routes
+
+Protected admin routes
+
+Protected agent routes
+
+User profile information
+
+Active/inactive user management
+
+👥 User Roles
+
+EstateHub supports three primary roles:
+
+Role
+
+Main Capabilities
+
+USER
+
+Browse properties, wishlist, compare, enquiries, site visits, bookings, notifications
+
+AGENT
+
+Agent dashboard, assigned properties, units, enquiries, visits and bookings
+
+ADMIN
+
+Full system administration, property/unit/amenity/user/enquiry/visit/booking management and analytics
+
+🏡 Property Marketplace
+
+Property browsing
+
+Users can:
+
+Browse available properties
+
+View property details
+
+Search properties
+
+Filter properties
+
+Sort properties
+
+Paginate property results
+
+View property images
+
+View property amenities
+
+View property information
+
+View nearby facilities
+
+View floor-plan information where available
+
+View apartment/project information
+
+Property search/filtering
+
+Supported filtering includes:
+
+Location
+
+Property type
+
+BHK
+
+Minimum price
+
+Maximum price
+
+Minimum area
+
+Maximum area
+
+Bedrooms
+
+Bathrooms
+
+Parking
+
+Property status
+
+Sorting
+
+Pagination
+
+Property information
+
+Properties can contain:
+
+Title
+
+Description
+
+Location
+
+City
+
+State
+
+Price
+
+Property type
+
+BHK
+
+Area
+
+Bedrooms
+
+Bathrooms
+
+Floor
+
+Total floors
+
+Parking
+
+Amenities
+
+Images
+
+Floor plan
+
+Possession date
+
+Construction year
+
+Property status
+
+Assigned agent
+
+Nearby facilities
+
+Project flag
+
+🏢 Apartment & Unit Management
+
+EstateHub supports individual apartment/unit management for projects.
+
+A property can contain multiple units.
+
+Example:
+
+Green Valley Residency
 │
-├── client/                 # React frontend
+├── A-101
+├── A-102
+├── A-103
+├── A-201
+├── A-202
+└── A-203
+
+Unit information includes:
+
+Property
+
+Unit number
+
+Block
+
+Floor
+
+BHK
+
+Area
+
+Price
+
+Status
+
+Bedrooms
+
+Bathrooms
+
+Parking
+
+Supported unit statuses:
+
+AVAILABLE
+RESERVED
+BOOKED
+SOLD
+
+Admins can manage units through the admin unit-management interface.
+
+🛠️ Admin Panel
+
+Administrators have access to dedicated management pages.
+
+Admin Dashboard
+
+Provides:
+
+Property statistics
+
+User statistics
+
+Booking statistics
+
+Enquiry statistics
+
+Visit statistics
+
+Analytics
+
+Charts and visual reporting
+
+Property Management
+
+Admins can:
+
+Create properties
+
+View properties
+
+Search properties
+
+Edit properties
+
+Delete properties
+
+Assign agents
+
+Manage property status
+
+Manage property information
+
+Unit Management
+
+Admins can:
+
+Create units
+
+View units
+
+Edit units
+
+Delete units
+
+Manage unit availability/status
+
+Associate units with properties
+
+Amenity Management
+
+Admins can:
+
+View amenities
+
+Create amenities
+
+Manage property amenities
+
+User Management
+
+Admins can:
+
+View users
+
+Update users
+
+Delete users
+
+Manage user information
+
+Manage roles/status
+
+Enquiry Management
+
+Admins can:
+
+View enquiries
+
+Update enquiry status
+
+Manage enquiries
+
+Manage enquiry assignments
+
+Visit Management
+
+Admins can:
+
+View site visits
+
+Update visit status
+
+Manage scheduled visits
+
+Booking Management
+
+Admins can:
+
+View bookings
+
+Review booking requests
+
+Update booking status
+
+Manage booking information
+
+👨‍💼 Agent Dashboard
+
+Agents have a dedicated dashboard and protected agent routes.
+
+Agent functionality includes:
+
+Agent dashboard
+
+Assigned property access
+
+Property management access
+
+Unit management access
+
+Enquiry management
+
+Site-visit management
+
+Booking management
+
+Agent routes include:
+
+/agent/dashboard
+/agent/properties
+/agent/units
+/agent/enquiries
+/agent/visits
+/agent/bookings
+
+Agent access is protected by backend and frontend role authorization.
+
+❤️ Wishlist
+
+Authenticated users can:
+
+Add properties to wishlist
+
+Remove properties from wishlist
+
+View their wishlist
+
+Keep wishlist data associated with their account
+
+Wishlist APIs are user-specific so users can access their own wishlist.
+
+⚖️ Property Comparison
+
+Users can compare properties side-by-side.
+
+The comparison feature helps users evaluate property information such as:
+
+Price
+
+Area
+
+BHK
+
+Bedrooms
+
+Bathrooms
+
+Property type
+
+Location
+
+Other available property attributes
+
+📩 Enquiry Management
+
+Users can send enquiries about properties.
+
+An enquiry can contain:
+
+User
+
+Property
+
+Name
+
+Email
+
+Phone
+
+Message
+
+Status
+
+Assigned agent
+
+Enquiry workflow supports status management for agents/admins.
+
+Example workflow:
+
+NEW
+  ↓
+CONTACTED
+  ↓
+INTERESTED
+  ↓
+SITE_VISIT
+  ↓
+NEGOTIATION
+  ↓
+CONVERTED / CLOSED
+
+Users can view their own enquiries while authorized agents/admins can manage relevant enquiries.
+
+📅 Site Visit Management
+
+Users can schedule property visits.
+
+Visit information includes:
+
+User
+
+Property
+
+Date
+
+Time
+
+Name
+
+Phone
+
+Message
+
+Status
+
+Agent
+
+Agents/admins can manage visit status.
+
+Typical workflow:
+
+REQUESTED
+    ↓
+APPROVED
+    ↓
+COMPLETED
+
+Visits can also be rejected, rescheduled, or cancelled according to the application's supported workflow.
+
+📝 Booking Management
+
+EstateHub supports property/unit booking requests.
+
+Booking information includes:
+
+User
+
+Property
+
+Unit
+
+Booking date
+
+Amount
+
+Booking status
+
+Notes
+
+Payment status
+
+Booking APIs allow:
+
+Creating booking requests
+
+Viewing bookings
+
+Admin booking management
+
+Booking status management
+
+The system is structured to support apartment/unit-level booking workflows.
+
+Payment processing is separate from the booking record and should be connected to a verified payment gateway for production transactions.
+
+🔔 Notifications
+
+The backend includes a notification system.
+
+Notifications contain:
+
+User
+
+Title
+
+Message
+
+Type
+
+Read/unread status
+
+Related record ID
+
+Supported notification APIs include:
+
+Get notifications
+
+Mark notifications as read
+
+Notifications can be associated with events such as enquiries, visits and bookings.
+
+🔐 Security
+
+EstateHub includes multiple security mechanisms:
+
+JWT authentication
+
+bcrypt password hashing
+
+Role-based authorization
+
+Protected frontend routes
+
+Protected backend API routes
+
+Express request validation
+
+CORS configuration
+
+Security response headers
+
+Environment-based secrets
+
+Authentication rate limiting
+
+Restricted admin/agent operations
+
+User-specific data access
+
+Backend validation for protected operations
+
+Security-related environment variables are kept outside source code.
+
+📧 Email & Password Recovery
+
+The backend includes an email service and password recovery flow.
+
+Supported functionality includes:
+
+Forgot password
+
+Reset password
+
+Password reset token expiry
+
+SMTP configuration
+
+Configurable sender address
+
+Email service abstraction
+
+Email configuration is provided through environment variables.
+
+🖼️ Image Storage
+
+EstateHub includes an image-storage service.
+
+Supported configuration includes:
+
+IMAGE_STORAGE_PROVIDER=local
+
+and Cloudinary configuration:
+
+IMAGE_STORAGE_PROVIDER=cloudinary
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+The backend also supports:
+
+Image upload handling
+
+Local image storage
+
+Cloudinary configuration
+
+Upload directory configuration
+
+Maximum image-size configuration
+
+Uploaded local images are exposed through:
+
+/uploads
+
+📊 Dashboard & Analytics
+
+The admin dashboard includes statistics and analytics endpoints.
+
+Available analytics include:
+
+Property statistics
+
+User statistics
+
+Booking statistics
+
+Enquiry statistics
+
+Visit statistics
+
+Chart data
+
+Monthly activity
+
+Dashboard APIs are protected for administrator access.
+
+🎨 Frontend UI
+
+The React application includes:
+
+Responsive layout
+
+Navigation bar
+
+Footer
+
+Property cards
+
+Property search
+
+Property detail pages
+
+Forms
+
+Loading states
+
+Error handling
+
+Toast notifications
+
+Admin pages
+
+Agent dashboard
+
+User dashboard
+
+Wishlist
+
+Compare page
+
+Authentication pages
+
+Password recovery pages
+
+Charts
+
+Responsive Tailwind CSS interface
+
+🧪 Automated Testing
+
+The project contains backend and frontend tests.
+
+Backend
+
+The backend uses:
+
+Jest
+
+Supertest
+
+MongoDB Memory Server
+
+Run:
+
+cd server
+npm test
+
+Coverage:
+
+npm run test:coverage
+
+Watch mode:
+
+npm run test:watch
+
+Backend test coverage includes areas such as:
+
+Registration
+
+Password hashing
+
+Login
+
+JWT authentication
+
+Admin authorization
+
+Agent authorization
+
+Property CRUD
+
+Unit CRUD
+
+Wishlist isolation
+
+Enquiry access
+
+Visit access
+
+Booking security
+
+Booking amount validation
+
+Payment-status protection
+
+Unit availability
+
+Cross-property unit validation
+
+Cross-user booking access
+
+Frontend
+
+The frontend uses:
+
+Vitest
+
+Testing Library
+
+jsdom
+
+Testing Library User Event
+
+jest-dom
+
+Run:
+
+cd client
+npm test
+
+Watch mode:
+
+npm run test:watch
+
+🧱 Technology Stack
+
+Frontend
+
+React
+
+React Router
+
+Vite
+
+Tailwind CSS
+
+Axios
+
+React Hook Form
+
+React Hot Toast
+
+Lucide React
+
+Recharts
+
+Vitest
+
+Testing Library
+
+Oxlint
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB
+
+Mongoose
+
+JWT
+
+bcryptjs
+
+Express Validator
+
+CORS
+
+Multer
+
+Cloudinary
+
+Nodemailer
+
+Jest
+
+Supertest
+
+MongoDB Memory Server
+
+📁 Project Structure
+
+real-estate/
+│
+├── client/
+│   ├── public/
 │   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   │   ├── Navbar.jsx
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── AdminRoute.jsx
+│   │   │   ├── AgentRoute.jsx
 │   │   │   ├── Footer.jsx
-│   │   │   ├── ProtectedRoute.jsx
-│   │   │   └── AdminRoute.jsx
-│   │   ├── pages/         # Page components
+│   │   │   ├── Navbar.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   │
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── admin/
+│   │   │   ├── agent/
 │   │   │   ├── Home.jsx
 │   │   │   ├── Properties.jsx
 │   │   │   ├── PropertyDetails.jsx
 │   │   │   ├── Login.jsx
 │   │   │   ├── Register.jsx
+│   │   │   ├── ForgotPassword.jsx
+│   │   │   ├── ResetPassword.jsx
 │   │   │   ├── Dashboard.jsx
 │   │   │   ├── Wishlist.jsx
-│   │   │   ├── Compare.jsx
-│   │   │   ├── About.jsx
-│   │   │   ├── Contact.jsx
-│   │   │   └── admin/     # Admin pages
-│   │   │       ├── AdminDashboard.jsx
-│   │   │       ├── AdminProperties.jsx
-│   │   │       ├── AdminUsers.jsx
-│   │   │       ├── AdminEnquiries.jsx
-│   │   │       ├── AdminVisits.jsx
-│   │   │       └── AdminBookings.jsx
-│   │   ├── context/       # React Context
-│   │   │   └── AuthContext.jsx
-│   │   ├── services/      # API services
+│   │   │   └── Compare.jsx
+│   │   │
+│   │   ├── services/
 │   │   │   └── api.js
+│   │   │
 │   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
 │   │   └── main.jsx
+│   │
 │   ├── package.json
-│   └── vite.config.js
+│   ├── vite.config.js
+│   └── tailwind.config.js
 │
-├── server/                # Express backend
-│   ├── config/           # Configuration files
+├── server/
+│   ├── config/
 │   │   └── db.js
-│   ├── controllers/      # Route controllers
+│   │
+│   ├── controllers/
+│   │   ├── amenityController.js
 │   │   ├── authController.js
+│   │   ├── bookingController.js
+│   │   ├── dashboardController.js
+│   │   ├── enquiryController.js
+│   │   ├── notificationController.js
 │   │   ├── propertyController.js
 │   │   ├── unitController.js
-│   │   ├── enquiryController.js
-│   │   ├── visitController.js
-│   │   ├── bookingController.js
-│   │   ├── wishlistController.js
 │   │   ├── userController.js
-│   │   ├── dashboardController.js
-│   │   ├── notificationController.js
-│   │   └── amenityController.js
-│   ├── middleware/       # Custom middleware
-│   │   └── auth.js
-│   ├── models/          # Mongoose models
-│   │   ├── User.js
+│   │   ├── visitController.js
+│   │   └── wishlistController.js
+│   │
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   └── rateLimit.js
+│   │
+│   ├── models/
+│   │   ├── Amenity.js
+│   │   ├── Booking.js
+│   │   ├── Enquiry.js
+│   │   ├── Notification.js
 │   │   ├── Property.js
 │   │   ├── Unit.js
-│   │   ├── Enquiry.js
+│   │   ├── User.js
 │   │   ├── Visit.js
-│   │   ├── Booking.js
-│   │   ├── Wishlist.js
-│   │   ├── Notification.js
-│   │   └── Amenity.js
-│   ├── routes/          # API routes
+│   │   └── Wishlist.js
+│   │
+│   ├── routes/
+│   │   ├── amenities.js
 │   │   ├── auth.js
+│   │   ├── bookings.js
+│   │   ├── dashboard.js
+│   │   ├── enquiries.js
+│   │   ├── notifications.js
 │   │   ├── properties.js
 │   │   ├── units.js
-│   │   ├── enquiries.js
-│   │   ├── visits.js
-│   │   ├── bookings.js
-│   │   ├── wishlist.js
 │   │   ├── users.js
-│   │   ├── dashboard.js
-│   │   ├── notifications.js
-│   │   └── amenities.js
-│   ├── seed/            # Database seeding
+│   │   ├── visits.js
+│   │   └── wishlist.js
+│   │
+│   ├── services/
+│   │   ├── emailService.js
+│   │   ├── imageStorage.js
+│   │   └── notificationService.js
+│   │
+│   ├── seed/
 │   │   └── seed.js
+│   │
+│   ├── tests/
+│   │   └── api.test.js
+│   │
+│   ├── app.js
 │   ├── server.js
-│   └── package.json
+│   ├── package.json
+│   └── jest.config.js
 │
-├── .env                  # Environment variables (not in git)
-├── .env.example         # Environment variables template
+├── .env.example
 ├── .gitignore
+├── SETUP.md
+├── TESTING.md
 └── README.md
-```
 
-## 🚀 Installation
+🔗 Frontend Routes
 
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (v4.4 or higher) running locally OR MongoDB Atlas account
-- npm or yarn
+Public
 
-**Note**: If you don't have MongoDB installed locally, you can:
-1. Install MongoDB Community Server from https://www.mongodb.com/try/download/community
-2. Use MongoDB Atlas (free tier) at https://www.mongodb.com/cloud/atlas
-3. Use Docker: `docker run -d -p 27017:27017 --name mongodb mongo:latest`
+/
+/properties
+/properties/:id
+/login
+/register
+/forgot-password
+/reset-password
+/about
+/contact
+/compare
 
-### Setup Instructions
+Authenticated User
 
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd real-estate
-```
+/dashboard
+/wishlist
 
-2. **Install server dependencies**
-```bash
-cd server
-npm install
-```
+Admin
 
-3. **Install client dependencies**
-```bash
-cd ../client
-npm install
-```
+/admin/dashboard
+/admin/properties
+/admin/users
+/admin/enquiries
+/admin/visits
+/admin/bookings
+/admin/units
+/admin/amenities
 
-4. **Configure environment variables**
+Agent
 
-Create a `.env` file in the root directory:
-```env
+/agent/dashboard
+/agent/properties
+/agent/units
+/agent/enquiries
+/agent/visits
+/agent/bookings
+
+🔌 API Reference
+
+Base URL:
+
+http://localhost:5000/api
+
+Authentication
+
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+
+Properties
+
+GET    /api/properties
+GET    /api/properties/:id
+POST   /api/properties
+PUT    /api/properties/:id
+DELETE /api/properties/:id
+
+Supported property query parameters include:
+
+location
+propertyType
+bhk
+minPrice
+maxPrice
+minArea
+maxArea
+bedrooms
+bathrooms
+parking
+status
+sortBy
+order
+page
+limit
+
+Units
+
+GET    /api/units
+POST   /api/units
+PUT    /api/units/:id
+DELETE /api/units/:id
+
+Enquiries
+
+GET    /api/enquiries
+POST   /api/enquiries
+PUT    /api/enquiries/:id
+DELETE /api/enquiries/:id
+
+Site Visits
+
+GET /api/visits
+POST /api/visits
+PUT /api/visits/:id
+
+Bookings
+
+GET /api/bookings
+POST /api/bookings
+PUT /api/bookings/:id
+
+Wishlist
+
+GET    /api/wishlist
+POST   /api/wishlist
+DELETE /api/wishlist/:propertyId
+
+Users
+
+GET    /api/users
+PUT    /api/users/:id
+DELETE /api/users/:id
+
+Dashboard
+
+GET /api/dashboard/stats
+GET /api/dashboard/analytics
+
+Notifications
+
+GET /api/notifications
+PUT /api/notifications/read
+
+Amenities
+
+GET  /api/amenities
+POST /api/amenities
+
+⚙️ Environment Configuration
+
+Create a backend .env file using .env.example as the template.
+
+Example:
+
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/estatehub
 JWT_SECRET=your-secret-key-change-this-in-production
+JWT_EXPIRES_IN=1d
 CLIENT_URL=http://localhost:5173
-```
 
-For MongoDB Atlas, use your connection string:
-```env
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/estatehub
-```
+PASSWORD_RESET_TTL_MINUTES=15
 
-5. **Start MongoDB**
-- **Option 1**: If you have MongoDB installed locally, start the MongoDB service
-- **Option 2**: Use MongoDB Atlas (update MONGO_URI in .env with your Atlas connection string)
-- **Option 3**: Use Docker: `docker run -d -p 27017:27017 --name mongodb mongo:latest`
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=
+SMTP_PASSWORD=
+EMAIL_FROM=
 
-6. **Seed the database (optional)**
-```bash
+IMAGE_STORAGE_PROVIDER=local
+IMAGE_UPLOAD_DIR=uploads
+MAX_IMAGE_SIZE_MB=5
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+Important
+
+Never commit:
+
+.env
+MongoDB passwords
+JWT secrets
+SMTP passwords
+Cloudinary secrets
+Payment credentials
+API keys
+
+Use .env.example for safe configuration templates.
+
+🚀 Installation & Setup
+
+Prerequisites
+
+Install:
+
+Node.js
+
+npm
+
+MongoDB
+
+You can use MongoDB locally, MongoDB Atlas, or Docker.
+
+1. Clone the repository
+
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd real-estate
+
+2. Install backend dependencies
+
+cd server
+npm install
+
+3. Install frontend dependencies
+
+cd ../client
+npm install
+
+4. Configure environment
+
+Create:
+
+server/.env
+
+using the root .env.example as a reference.
+
+Configure:
+
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/estatehub
+JWT_SECRET=change-this-secret
+JWT_EXPIRES_IN=1d
+CLIENT_URL=http://localhost:5173
+
+Add SMTP or Cloudinary configuration if those features are enabled.
+
+🗄️ MongoDB
+
+Local MongoDB
+
+Default local database:
+
+mongodb://localhost:27017/estatehub
+
+Make sure MongoDB is running before starting the backend.
+
+MongoDB Atlas
+
+Set:
+
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>/<database>
+
+Docker
+
+docker run -d \
+  -p 27017:27017 \
+  --name mongodb \
+  mongo:latest
+
+🌱 Seed Demo Data
+
+The seed script creates sample data for development/testing.
+
+Run:
+
 cd server
 npm run seed
-```
 
-This will create sample data including:
-- 5 users (admin, 2 agents, 2 regular users)
-- 6 properties with various types
-- 10 apartment units
-- 12 amenities
-- Sample enquiries, visits, and bookings
+The sample dataset includes:
 
-6. **Start the backend server**
-```bash
+Admin account
+
+Agent accounts
+
+User accounts
+
+Sample properties
+
+Apartment units
+
+Amenities
+
+Enquiries
+
+Visits
+
+Bookings
+
+Wishlist-related data
+
+▶️ Run the Application
+
+Terminal 1 — Backend
+
 cd server
 npm run dev
-```
 
-The server will run on `http://localhost:5000`
+Backend:
 
-7. **Start the frontend development server**
-```bash
+http://localhost:5000
+
+API:
+
+http://localhost:5000/api
+
+Terminal 2 — Frontend
+
 cd client
 npm run dev
-```
 
-The frontend will run on `http://localhost:5173`
+Frontend:
 
-## 👤 Demo Accounts
+http://localhost:5173
 
-After seeding the database, you can use these demo accounts:
+👤 Demo Accounts
 
-### Admin Account
-- **Email**: admin@estatehub.com
-- **Password**: admin123
-- **Access**: Full admin dashboard and all management features
+After running the seed script:
 
-### Agent Accounts
-- **Email**: agent1@estatehub.com
-- **Password**: agent123
-- **Access**: View assigned properties, manage enquiries and visits
+Admin
 
-- **Email**: agent2@estatehub.com
-- **Password**: agent123
-- **Access**: View assigned properties, manage enquiries and visits
+Email: admin@estatehub.com
+Password: admin123
 
-### User Accounts
-- **Email**: user1@estatehub.com
-- **Password**: user123
-- **Access**: Browse properties, create enquiries, schedule visits, request bookings
+Access:
 
-- **Email**: user2@estatehub.com
-- **Password**: user123
-- **Access**: Browse properties, create enquiries, schedule visits, request bookings
+Admin Dashboard
+Properties
+Units
+Amenities
+Users
+Enquiries
+Visits
+Bookings
+Analytics
 
-## 📚 API Documentation
+Agent 1
 
-### Authentication Endpoints
+Email: agent1@estatehub.com
+Password: agent123
 
-#### POST /api/auth/register
-Register a new user
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "9876543210",
-  "password": "password123",
-  "confirmPassword": "password123"
-}
-```
+Agent 2
 
-#### POST /api/auth/login
-Login user
-```json
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
+Email: agent2@estatehub.com
+Password: agent123
 
-#### GET /api/auth/me
-Get current user (requires authentication)
+User 1
 
-### Property Endpoints
+Email: user1@estatehub.com
+Password: user123
 
-#### GET /api/properties
-Get all properties with optional filters
-```
-Query params: location, propertyType, bhk, minPrice, maxPrice, minArea, maxArea, 
-bedrooms, bathrooms, parking, status, sortBy, order, page, limit
-```
+User 2
 
-#### GET /api/properties/:id
-Get property by ID
+Email: user2@estatehub.com
+Password: user123
 
-#### POST /api/properties
-Create new property (Admin only)
+These credentials are for local/demo environments. Change or remove them before production deployment.
 
-#### PUT /api/properties/:id
-Update property (Admin only)
+🧪 Testing
 
-#### DELETE /api/properties/:id
-Delete property (Admin only)
+Backend
 
-### Unit Endpoints
-
-#### GET /api/units
-Get all units
-
-#### POST /api/units
-Create new unit (Admin only)
-
-#### PUT /api/units/:id
-Update unit (Admin only)
-
-#### DELETE /api/units/:id
-Delete unit (Admin only)
-
-### Enquiry Endpoints
-
-#### GET /api/enquiries
-Get all enquiries (users see their own, agents/admin see all)
-
-#### POST /api/enquiries
-Create new enquiry
-
-#### PUT /api/enquiries/:id
-Update enquiry status (Agent/Admin only)
-
-#### DELETE /api/enquiries/:id
-Delete enquiry (Agent/Admin only)
-
-### Visit Endpoints
-
-#### GET /api/visits
-Get all visits
-
-#### POST /api/visits
-Schedule new visit
-
-#### PUT /api/visits/:id
-Update visit status (Agent/Admin only)
-
-### Booking Endpoints
-
-#### GET /api/bookings
-Get all bookings
-
-#### POST /api/bookings
-Create new booking request
-
-#### PUT /api/bookings/:id
-Update booking status (Admin only)
-
-### Wishlist Endpoints
-
-#### GET /api/wishlist
-Get user's wishlist
-
-#### POST /api/wishlist
-Add property to wishlist
-
-#### DELETE /api/wishlist/:propertyId
-Remove property from wishlist
-
-### User Endpoints
-
-#### GET /api/users
-Get all users (Admin only)
-
-#### PUT /api/users/:id
-Update user (Admin only)
-
-#### DELETE /api/users/:id
-Delete user (Admin only)
-
-### Dashboard Endpoints
-
-#### GET /api/dashboard/stats
-Get dashboard statistics (Admin only)
-
-#### GET /api/dashboard/analytics
-Get dashboard analytics with charts (Admin only)
-
-### Notification Endpoints
-
-#### GET /api/notifications
-Get user notifications
-
-#### PUT /api/notifications/read
-Mark notifications as read
-
-### Amenity Endpoints
-
-#### GET /api/amenities
-Get all amenities
-
-#### POST /api/amenities
-Create new amenity (Admin only)
-
-## 🔐 Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Password Hashing**: bcryptjs for secure password storage
-- **Role-Based Authorization**: USER, AGENT, ADMIN roles with appropriate permissions
-- **Protected Routes**: API routes protected with authentication middleware
-- **Input Validation**: Express-validator for request validation
-- **CORS Configuration**: Cross-origin resource sharing properly configured
-- **Environment Variables**: Sensitive data stored in environment variables
-
-## 🎨 UI/UX Features
-
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Professional UI**: Modern, clean interface with Tailwind CSS
-- **Loading States**: Skeleton loaders and loading indicators
-- **Error Handling**: User-friendly error messages
-- **Toast Notifications**: Feedback for user actions
-- **Image Gallery**: Professional property image viewing
-- **Data Visualization**: Charts and graphs for analytics
-- **Search & Filtering**: Advanced property search capabilities
-- **Property Comparison**: Side-by-side property comparison
-
-## 📊 Database Schema
-
-### User Model
-- name, email, phone, password, role, isActive, assignedProperties, profile
-
-### Property Model
-- title, description, location, city, state, price, propertyType, bhk, area, bedrooms, bathrooms, floor, totalFloors, parking, amenities, images, floorPlan, possessionDate, constructionYear, status, agent, nearbyFacilities, isProject
-
-### Unit Model
-- property, unitNumber, block, floor, bhk, area, price, status, bedrooms, bathrooms, parking
-
-### Enquiry Model
-- user, property, name, email, phone, message, status, agent
-
-### Visit Model
-- user, property, date, time, name, phone, message, status, agent
-
-### Booking Model
-- user, property, unit, bookingDate, amount, status, notes, paymentStatus
-
-### Wishlist Model
-- user, properties (array)
-
-### Notification Model
-- user, title, message, type, isRead, relatedId
-
-### Amenity Model
-- name, icon, description
-
-## 🔧 Development
-
-### Running Tests
-Currently, the project focuses on manual testing. To test the application:
-
-1. Start both servers (backend and frontend)
-2. Use the demo accounts to test different user roles
-3. Test the complete user flow: register → browse → search → wishlist → enquiry → visit → booking
-4. Test the admin flow: login → manage properties → manage users → handle enquiries → approve bookings
-
-### Building for Production
-
-**Backend:**
-```bash
 cd server
-npm start
-```
+npm test
 
-**Frontend:**
-```bash
+Coverage:
+
+npm run test:coverage
+
+Watch:
+
+npm run test:watch
+
+Frontend
+
+cd client
+npm test
+
+Watch:
+
+npm run test:watch
+
+🏗️ Production Build
+
+Build the frontend:
+
 cd client
 npm run build
-```
 
-The build output will be in the `client/dist` directory.
+Preview the production frontend:
 
-## 🚧 Future Improvements
+npm run preview
 
-- Real-time notifications with Socket.io
-- Email integration for enquiry/visit confirmations
-- Payment gateway integration (Razorpay/Stripe)
-- Advanced image upload with Cloudinary
-- Google Maps integration for location
-- Property video tours
-- Virtual reality property viewing
-- Mobile app development (React Native)
-- Advanced analytics and reporting
-- Multi-language support
-- Dark mode theme
+Start the backend:
 
-## 📝 License
+cd server
+npm start
 
-This project is created for educational and demonstration purposes.
+For production:
 
-## 👨‍💻 Author
+Use a production MongoDB instance
 
-Built as a comprehensive MERN stack demonstration project.
+Configure secure environment variables
 
-## 🙏 Acknowledgments
+Configure the production frontend URL
 
-- React and Vite teams for excellent tools
-- Tailwind CSS for the utility-first CSS framework
-- MongoDB for the flexible database solution
-- All open-source libraries used in this project
+Configure CORS
 
----
+Enable HTTPS
 
-**Note**: This is a demonstration project. For production use, additional security measures, testing, and optimization would be required.
-#   r e a l - e s t a t e  
- 
+Configure image storage
+
+Configure SMTP/email
+
+Use a process manager such as PM2 where appropriate
+
+Never use demo credentials
+
+🔄 Application Workflow
+
+A typical customer workflow is:
+
+Visit Website
+     ↓
+Browse Properties
+     ↓
+Search / Filter
+     ↓
+View Property
+     ↓
+Compare / Wishlist
+     ↓
+Send Enquiry
+     ↓
+Schedule Site Visit
+     ↓
+Select Property / Unit
+     ↓
+Submit Booking Request
+     ↓
+Admin / Agent Review
+     ↓
+Booking Status Update
+     ↓
+Notification
+
+Administrative workflow:
+
+Admin Login
+     ↓
+Admin Dashboard
+     ↓
+Manage Properties
+     ↓
+Manage Units
+     ↓
+Manage Amenities
+     ↓
+Manage Users / Agents
+     ↓
+Manage Enquiries
+     ↓
+Manage Visits
+     ↓
+Manage Bookings
+     ↓
+Review Analytics
+
+🧩 Architecture
+
+EstateHub follows a standard MERN architecture:
+
+┌───────────────────────────────┐
+│          React Client         │
+│                               │
+│ Pages / Components / Context  │
+│ Axios API Service / Routing   │
+└───────────────┬───────────────┘
+                │ HTTP / JSON
+                ▼
+┌───────────────────────────────┐
+│        Express.js API         │
+│                               │
+│ Routes → Middleware →         │
+│ Controllers → Services        │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│          Mongoose             │
+│                               │
+│ Models / Validation / Queries │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│           MongoDB             │
+└───────────────────────────────┘
+
+Supporting services:
+
+Express API
+   ├── Email Service
+   ├── Image Storage
+   └── Notification Service
